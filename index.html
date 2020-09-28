@@ -9,10 +9,24 @@
 </head>
 <body>
 
-<div id="app">
-  <p>Hello, {{ name.toUpperCase() }}!</p>
-
-  <p><input type="text" v-model="name"></p>
+<div id="app" class="container">
+  <h1>My Todos</h1>
+  <ul v-if="todos.length">
+    <li v-for="(todo, index) in todos">
+      <input type="checkbox" v-model="todo.isDone">
+      <!-- "{done: todo.isDone}"部は、todo.isDoneがtrueだったらclass="done"を付与するという意味 -->
+      <span v-bind:class="{done: todo.isDone}">{{ todo.title }}</span>
+      <span @click='deleteItem' class="command">[x]</span>
+    </li>
+    <!-- <li v-show="!todos.length">Nothing to do, yay!</li> -->
+  </ul>
+  <ul v-else>
+    <li>Nothing to do, yay!</li>
+  </ul>
+  <form @submit.prevent="addItem">
+    <input type="text" v-model="newItem">
+    <input type="submit" value="add">
+  </form>
 </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
