@@ -11,24 +11,12 @@
 
 <body>
 
-  <div id="app" class="container">
-    <h1>
-      <button @click="purge">Purge</button>
-      My Todos
-      <span class="info">({{ remaining.length }} / {{ todos.length }})</span>
-    </h1>
-    <ul>
-      <li v-for="(todo, index) in todos">
-        <input type="checkbox" v-model="todo.isDone">
-        <span v-bind:class="{done: todo.isDone}">{{ todo.title }}</span>
-        <span @click='deleteItem(index)' class="command">[x]</span>
-      </li>
-      <li v-show="!todos.length">Nothing to do, yay!</li>
-    </ul>
-    <form @submit.prevent="addItem">
-      <input type="text" v-model="newItem">
-      <input type="submit" value="add">
-    </form>
+  <div id="app">
+    <p>Total Likes: {{ total }}</p>
+    <like-component message="Like" @increment="incrementTotal"></like-component>
+    <like-component message="Awesome" @increment="incrementTotal"></like-component>
+    <like-component message="Great" @increment="incrementTotal"></like-component>
+    <like-component @increment="incrementTotal"></like-component>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
